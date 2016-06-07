@@ -4,8 +4,6 @@
 
 ## 연동 설정
 
-### 연동 설정
-
 * ```SQLALCHEMY_DATABASE_URI```
     * ```sqlite:////absolute/path/to/foo.db```
     * ```mysql://scott:tiger@localhost/mydatabase```
@@ -53,6 +51,14 @@
 >>> admin = User.query.filter_by(username='admin').first()
 <User u'admin'>
 ```
+
+### 모델/뷰 파일 모듈로 분리 및 설정 클래스
+
+* ```config``` 모듈 ```Configuration``` 클래스에 SQLAlchemy 관련 설정 멤버 변수 선언
+* ```run.py```에 models를 임포트
+* ```models.py``` 파일을 새로 만들어 필요한 모델 정의
+* ```__init__.py```에 SQLAlchemy db 객체 선언
+* ```from hello import app``` 임포트로 ```db.create_all()``` 호출 (from run 아님)
 
 ## 관계 정의
 
