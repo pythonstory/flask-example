@@ -12,6 +12,7 @@
 
 * hello.py 애플리케이션 파일을 패키지로 구성한다.
 * hello 폴더를 만들고 hello.py 파일의 내용이 그대로 __init__.py 파일이 된다.
+* hello 폴더 안에 templates 폴더와 static 폴더를 구성하여 각각 템플릿과 css, js, 이미지 파일을 놓는다.
 
 ## 요청
 
