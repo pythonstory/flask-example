@@ -1,4 +1,4 @@
-from . import app, db
+from . import db
 
 
 # 모델 정의

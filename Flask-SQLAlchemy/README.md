@@ -58,7 +58,8 @@
 * ```run.py```에 models를 임포트
 * ```models.py``` 파일을 새로 만들어 필요한 모델 정의
 * ```__init__.py```에 SQLAlchemy db 객체 선언
-* ```from hello import app``` 임포트로 ```db.create_all()``` 호출 (from run 아님)
+* ```from run import db``` 임포트로 ```db.create_all()``` 호출
+    * ```db.create_all()``` 호출하기 전에 반드시 모델이 먼저 임포트되어 있어야 한다.
 
 ## 관계 정의
 

@@ -1,4 +1,4 @@
-from hello import app, views, models
+from hello import app, db, views, models
 
 
 # 서버 실행
