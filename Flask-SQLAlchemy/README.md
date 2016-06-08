@@ -64,3 +64,95 @@
 ## 관계 정의
 
 ## CRUD
+
+### 레코드 삽입
+
+1. 파이썬 객체 생성
+1. Flask-SQLAlchemy 세션에 추가
+1. Flask-SQLAlchemy 세션을 커밋
+
+```python
+>>> from yourapp import User
+>>> me = User('admin', 'admin@example.com')
+>>> db.session.add(me)
+>>> me.id
+>>> db.session.commit()
+>>> me.id
+1
+```
+
+* 커밋 전에는 me.id값이 없고 커밋해야 비로소 ID값을 구할 수 있다.
+
+### 레코드 삭제
+
+```python
+>>> db.session.delete(me)
+>>> db.session.commit()
+```
+
+### 레코드 질의
+
+| id | username | email |
+|----|----------|-------|
+| 1 | admin | admin@example.com |
+| 2 | peter | peter@example.org |
+| 3 | guest | guest@example.com |
+
+레코드가 위와 같다고 가정한다.
+
+username = 검색
+
+```python
+>>> peter = User.query.filter_by(username='peter').first()
+>>> peter.id
+1
+>>> peter.email
+u'peter@example.org'
+```
+
+username = 검색 (존재하지 않으면 None을 반환)
+
+```python
+>>> missing = User.query.filter_by(username='missing').first()
+>>> missing is None
+True
+```
+
+email LIKE 검색
+
+```python
+>>> User.query.filter(User.email.endswith('@example.com')).all()
+[<User u'admin'>, <User u'guest'>]
+```
+
+ORDER BY
+
+```python
+>>> User.query.order_by(User.username)
+[<User u'admin'>, <User u'guest'>, <User u'peter'>]
+```
+
+LIMIT
+
+```python
+>>> User.query.limit(1).all()
+[<User u'admin'>]
+```
+
+PK로 구하기
+
+```python
+>>> User.query.get(1)
+<User u'admin'>
+```
+
+### 뷰에서 질의
+
+```get_or_404``` 또는 ```first_or_404``` 헬퍼 함수를 사용하면 편리하다.
+
+```python
+@app.route('/user/<username>')
+def show_user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    return render_template('show_user.html', user=user)
+```
