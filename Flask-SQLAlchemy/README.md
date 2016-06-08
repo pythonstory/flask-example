@@ -56,6 +56,28 @@
 <User u'admin'>
 ```
 
+* 모델 컬럼 타입
+
+| 타입 이름 | 파이썬 타입 | 설명 |
+|-----------|-------------|------|
+| Integer | int | 32비트 정수 |
+| SmallInteger | int | 16비트 정수 |
+| BigInteger | int or long | 무제한 길이 정수 |
+| Float | float | 부동소수 |
+| BigDecimal | decimal.Decimal | 고정소수 |
+| String | str | 가변길이 문자열 |
+| Text | str | 가변길이 문자열, 대용량 |
+| Unicode | unicode | 가변길이 유니코드 문자열 |
+| UnicodeText | unicode | 가변길이 유니코드 문자열, 대용량 |
+| Boolean | bool | Boolean 값 |
+| Date | datetime.date | 일자 |
+| Time | datetime.time | 시각 |
+| DateTime | datetime.datetime | 일자 시각 |
+| Interval | datetime.timedelta | 시간 차이 |
+| Enum | str | 문자열 값 리스트 |
+| PickletType | 불특정 파이썬 객체 | 자동 피클 직렬화 |
+| LargeBinary | str | 이진 blob |
+
 ### 모델/뷰 파일 모듈로 분리 및 설정 클래스
 
 소스: [Flask-SQLAlchemy/03-config](03-config)
