@@ -73,6 +73,9 @@
 
 소스: [Flask-SQLAlchemy/04-one-to-many](04-one-to-many)
 
+* ```Category``` 클래스 ```posts``` 멤버 변수는 거꾸로 ```posts```에 정의할 수도 있다. 코드는 동일하게 동작한다.
+    * ```category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))```
+
 1. 파이썬 객체 생성 - 참조되는 객체를 먼저 생성
 1. Flask-SQLAlchemy 세션에 추가 - 참조되는 객체를 먼저 추가
 1. Flask-SQLAlchemy 세션을 커밋
