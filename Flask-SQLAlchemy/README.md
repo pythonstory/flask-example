@@ -4,7 +4,7 @@
 
 ## 연동 설정
 
-[Flask-SQLAlchemy/01-config](01-config)
+소스: [Flask-SQLAlchemy/01-config](01-config)
 
 * ```SQLALCHEMY_DATABASE_URI```
     * ```sqlite:////absolute/path/to/foo.db```
@@ -17,6 +17,8 @@
 ## 모델 정의
 
 ### User 모델 정의 예시
+
+소스: [Flask-SQLAlchemy/02-user-model](02-user-model)
 
 * ```id```: 정수
 * ```username```: 문자열, VARCHAR(80)
@@ -56,6 +58,8 @@
 
 ### 모델/뷰 파일 모듈로 분리 및 설정 클래스
 
+소스: [Flask-SQLAlchemy/03-config](03-config)
+
 * ```config``` 모듈 ```Configuration``` 클래스에 SQLAlchemy 관련 설정 멤버 변수 선언
 * ```run.py```에 models를 임포트
 * ```models.py``` 파일을 새로 만들어 필요한 모델 정의
@@ -64,6 +68,10 @@
     * ```db.create_all()``` 호출하기 전에 반드시 모델이 먼저 임포트되어 있어야 한다.
 
 ## 관계 정의
+
+### 일대다 관계
+
+소스: [Flask-SQLAlchemy/04-one-to-many](04-one-to-many)
 
 ## CRUD
 
