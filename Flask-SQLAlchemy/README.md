@@ -4,7 +4,7 @@
 
 ## 연동 설정
 
-[Flask-SQLAlchemy/01-config](Flask-SQLAlchemy/01-config)
+[Flask-SQLAlchemy/01-config](01-config)
 
 * ```SQLALCHEMY_DATABASE_URI```
     * ```sqlite:////absolute/path/to/foo.db```
