@@ -73,6 +73,27 @@
 
 소스: [Flask-SQLAlchemy/04-one-to-many](04-one-to-many)
 
+1. 파이썬 객체 생성 - 참조되는 객체를 먼저 생성
+1. Flask-SQLAlchemy 세션에 추가 - 참조되는 객체를 먼저 추가
+1. Flask-SQLAlchemy 세션을 커밋
+
+```python
+>>> from hello import db, Post, Category
+>>> Post.query.all()
+[]
+>>> c = Category('python')
+>>> p = Post('Hello Python', 'Python is cool', c)
+>>> db.session.add(c)
+>>> db.session.add(p)
+>>> db.session.commit()
+>>> c.posts
+<sqlalchemy.orm.dynamic.AppenderBaseQuery object at 0x1027d37d0>
+>>> c.posts.all()
+[<Post 'Hello Python'>]
+>>> p.category
+<Category 'python'>
+```
+
 ## CRUD
 
 ### 레코드 삽입
