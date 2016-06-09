@@ -208,11 +208,13 @@ category = db.relationship('Category', backref=db.backref('posts', lazy='select'
     * joined: 조인 쿼리 + SELECT
     * dynamic: 에러
 * 1:N에서 1인 곳에 lazy 옵션을 정의하는 경우
-    * 디폴트 = dynamic = select = immediate: SELECT 쿼리 2번
+    * 디폴트 = select = immediate: SELECT 쿼리 2번
+    * dynamic: SELECT 쿼리 2번 (단, 참조변수는 객체가 반환되므로 all()메소드 체인)
     * subquery: 서브쿼리 1번 + SELECT 쿼리
     * joined: JOIN 쿼리 1번 + 추가 쿼리 없이 반환
-    
+  
     
 최종 결론
 
-* 그냥 lazy 옵션을 지정하지 않고 만약에 성능상에 문제가 발생하면 그 때 최적화를 진행한다.
+* 양방향 정의가 필요하면 참조하는 쪽에만 관계 정의를 하고 ```backref``` 옵션을 이용한다.
+* lazy='dynamic'을 명시적으로 지정하고 성능상에 문제가 발생하면 그 때 최적화를 진행한다.
