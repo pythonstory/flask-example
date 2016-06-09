@@ -119,6 +119,20 @@
 <Category 'python'>
 ```
 
+* 관계 정의 옵션
+
+| 옵션 이름 | 설명 |
+|-----------|------|
+| backref | 관계를 맺어 다른 모델의 역참조를 추가 |
+| primaryjoin | 두 모델 사이에 조인 조건을 명시적으로 지정<br>관계가 불명확할 때에만 필요 |
+| lazy | select <br> immediate <br> joined <br> subquery <br> noload <br> dynamic |
+| uselist | False일 경우 리스트가 아니라 스칼라(객체) - 일대일 제약조건으로 사용 |
+| order_by | 관계에서 항목의 순서를 지정 |
+| secondary | 다대다 관계에서 연관 테이블의 이름을 지정 |
+| secondaryjoin | 관계가 불분명할 때 다대다 관계에서 2차 조인 조건을 지정 |
+
+### 다대다 관계
+
 ## CRUD
 
 ### 레코드 삽입

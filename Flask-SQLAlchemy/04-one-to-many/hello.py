@@ -23,6 +23,7 @@ class Post(db.Model):
     body = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
 
+    # Category 모델 참조
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     
     def __init__(self, title, body, category, pub_date=None):
@@ -40,7 +41,10 @@ class Post(db.Model):
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    
+
+    # 일대다 참조 관계 정의
+    # backref: Post 모델에서 'category' 멤버변수로 역참조 추가
+    # lazy: 
     posts = db.relationship('Post', backref=db.backref('category'), lazy='dynamic')
 
     def __init__(self, name):
