@@ -91,12 +91,9 @@
 
 ## 관계 정의
 
-### 일대다 관계
+### 다대일 관계
 
-소스: [Flask-SQLAlchemy/04-one-to-many](04-one-to-many)
-
-* ```Category``` 클래스 ```posts``` 멤버 변수는 거꾸로 ```posts```에 정의할 수도 있다. 코드는 동일하게 동작한다.
-    * ```category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))```
+소스: [Flask-SQLAlchemy/04-many-to-one](04-many-to-one)
 
 1. 파이썬 객체 생성 - 참조되는 객체를 먼저 생성
 1. Flask-SQLAlchemy 세션에 추가 - 참조되는 객체를 먼저 추가
@@ -132,6 +129,11 @@
 | secondaryjoin | 관계가 불분명할 때 다대다 관계에서 2차 조인 조건을 지정 |
 
 ### 다대다 관계
+
+소스: [Flask-SQLAlchemy/05-many-to-many](04-many-to-many)
+
+* 연관 테이블의 선언을 실제 모델에서 참조하기 전에 선언해야 한다.
+* lazy 옵션을 양방향 모두 dynamic으로 하면 실체 반환되는 참조 객체에서 all() 메소드를 체인해야 쿼리 결과를 얻을 수 있다.
 
 ## CRUD
 
