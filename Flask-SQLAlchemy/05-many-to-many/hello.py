@@ -18,6 +18,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
 
+# 반드시 Post 모델 위에 선언해야 한다.
 post_tags = db.Table('post_tags', 
     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id')),
     db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
@@ -30,7 +31,9 @@ class Post(db.Model):
     title = db.Column(db.String(80))
     body = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
-   
+
+    # many-to-many 참조 관계 정의
+    # 양방향 모두 lazy='dynamic'이므로 반환 객체에 all() 메소드를 사용해야 실제 쿼리 실행
     tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'), lazy='dynamic')
     
     def __init__(self, title, body, category, pub_date=None):
