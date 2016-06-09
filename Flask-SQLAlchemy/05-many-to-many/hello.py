@@ -30,13 +30,7 @@ class Post(db.Model):
     title = db.Column(db.String(80))
     body = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
-
-    # Category 모델 참조키
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    
-    # Category 리스트 참조 변수    
-    category = db.relationship('Category', lazy='select')
-    
+   
     tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'), lazy='dynamic')
     
     def __init__(self, title, body, category, pub_date=None):
@@ -50,20 +44,6 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post %r>' % self.title
 
-
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    
-    posts = db.relationship('Post', lazy='dynamic')
-
-    def __init__(self, name):
-        self.name = name
-
-    def __repr__(self):
-        return '<Category %r>' % self.name
-
-
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -74,14 +54,17 @@ class Tag(db.Model):
     def __repr__(self):
         return '<Tag %r>' % self.name
 
-        
-
-
 
 # 뷰 함수와 라우팅
 @app.route('/')
-def index():    
-    return '<h1>Hello World!</h1>'
+def index():
+    p = Post.query.first()
+    print(p.tags.all())
+    
+    t = Tag.query.first()
+    print(t.posts.all())
+
+    return '<h1>Many-to-Many</h1>'
 
 # 서버 실행
 if __name__ == '__main__':

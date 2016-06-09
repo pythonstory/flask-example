@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' \
     + os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
 
@@ -25,6 +26,10 @@ class Post(db.Model):
 
     # Category 모델 참조
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    
+    # many-to-one 참조 관계
+    # one-to-many: backref는 dynamic lazy loading
+    category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))
     
     def __init__(self, title, body, category, pub_date=None):
         self.title = title
@@ -42,11 +47,6 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
 
-    # 일대다 참조 관계 정의
-    # backref: Post 모델에서 'category' 멤버변수로 역참조 추가
-    # lazy: 
-    posts = db.relationship('Post', backref=db.backref('category'), lazy='dynamic')
-
     def __init__(self, name):
         self.name = name
 
@@ -56,8 +56,14 @@ class Category(db.Model):
         
 # 뷰 함수와 라우팅
 @app.route('/')
-def index():    
-    return '<h1>Hello World!</h1>'
+def index():
+    p = Post.query.first()
+    print(p.category)
+    
+    c = Category.query.first()
+    print(c.posts.all())
+
+    return '<h1>Many-to-One (bidrectional)</h1>'
 
 # 서버 실행
 if __name__ == '__main__':
