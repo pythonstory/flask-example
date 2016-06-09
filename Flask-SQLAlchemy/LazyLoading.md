@@ -10,12 +10,26 @@ FROM post
 ```
 
 ```python
+p.category
+```
+
+```sql
+SELECT category.id, category.name
+FROM category 
+WHERE category.id = ?
+```
+
+```python
 c = Category.query.first()
 ```
 
 ```sql
 SELECT category.id, category.name
 FROM category
+```
+
+```python
+c.posts
 ```
 
 # Post 모델에서 category 선언 참조
@@ -154,3 +168,19 @@ category = db.relationship('Category', backref=db.backref('posts', lazy='select'
 ```
 
 ```Post``` 모델 안에 ```category``` 변수 선언할 때 ```backref=db.backref('posts', lazy='select')``` 옵션을 이렇게 지정하는 것은 ```Category``` 모델 안에 ```post``` 변수를 ```db.relationship('Post', lazy='select')```와 같이 선언하는 것과 같다.
+
+# 정리
+
+* 1:N에서 N인 곳에 lazy 옵션을 정의하는 경우
+    * 디폴트 = select = immediate = subquery: SELECT 쿼리 2번
+    * joined: 조인 쿼리 + SELECT
+    * dynamic: 에러
+* 1:N에서 1인 곳에 lazy 옵션을 정의하는 경우
+    * 디폴트 = dynamic = select = immediate: SELECT 쿼리 2번
+    * subquery: 서브쿼리 1번 + SELECT 쿼리
+    * joined: JOIN 쿼리 1번 + 추가 쿼리 없이 반환
+    
+    
+최종 결론
+
+* 그냥 lazy 옵션을 지정하지 않고 만약에 성능상에 문제가 발생하면 그 때 최적화를 진행한다.
