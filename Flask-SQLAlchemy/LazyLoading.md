@@ -1,4 +1,4 @@
-# FK 선언만 하는 경우 = 참조변수 있음(lazy 옵션 지정 안함 디폴트)
+# lazy 옵션 지정 안함 디폴트
 
 ```python
 p = Post.query.first()
@@ -61,18 +61,28 @@ FROM category
 ## category = db.relationship('Category', lazy='joined')
 
 ```python
-category = db.relationship('Category') 
+p = Post.query.first()
 ```
 
 ```sql
-SELECT post.id, post.title , post.body , post.pub_date, post.category_id, category.id, category.name
-FROM post LEFT OUTER JOIN category ON category.id = post.category_id
+SELECT post.id AS post_id, post.title AS post_title, post.body AS post_body, post.pub_date AS post_pub_date, post.category_id AS post_category_id 
+FROM post
+```
+
+```python
+p.cateogry
+```
+
+```sql
+SELECT category.id, category.name, t.post_category_id
+FROM (SELECT DISTINCT post.category_id
+FROM post) AS t JOIN category ON category.id = t.post_category_id ORDER BY t.post_category_id
 ```
 
 ## category = db.relationship('Category', lazy='dynamic')
 
 ```python
-category = db.relationship('Category')
+p.category
 ```
 
 에러: On relationship Post.category, 'dynamic' loaders cannot be used with many-to-one/one-to-one relationships and/or uselist=False.
