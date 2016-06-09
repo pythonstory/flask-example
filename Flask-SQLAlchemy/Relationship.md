@@ -49,6 +49,7 @@ class Category(db.Model):
     * ```post.category``` 형태로 Category를 가져올 수 있다.
     * ```category.posts``` 형태로 Post 리스트를 가져올 수 있다.
 * 양방향(bidirectional)이 아니라 단방향(unidirectional)을 구현하려면 필요 없는 모델 클래스 안에 참조변수를 선언하지 않는다.
+    * 일반적으로는 참조키를 두는 쪽에서 참조 변수를 선언한다. 위 예시에서는 ```Post``` 모델 클래스에서만 ```db.relationship()``` 선언을 하는 것이다.
     
 ### 일대다 관계 선언 (양방향 but 역참조 변수 추가로 한 쪽에만 선언)
 
@@ -60,13 +61,13 @@ class Post(db.Model):
     # Category 모델 참조키
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     
+    # Category 참조 변수
+    category = db.relationship('Category', backref='posts')
+    
     
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    
-    # Post 리스트 참조 변수
-    posts = db.relationship('Post', backref='category')
 ```
 
 * ```backref``` 속성으로 역참조 변수를 추가해 모델 클래스 한 쪽에만 참조변수를 선언할 수 있다.
@@ -145,3 +146,16 @@ class Tag(db.Model):
     * ```post_tags``` 테이블 선언이 아래에 있으면 이름이 정의되어 있지 않다(name is not defined)는 에러가 발생한다.
 * ```Post``` 모델 안에 ```tags``` 변수가 선언되어 있고 backref 역참조 속성을 ```posts``` 변수 이름으로 지정하고 있다.
     * ```post.tags``` 및 ```tag.posts``` 양방향 참조가 가능하다.
+
+# lazy 옵션
+
+```python
+    # Category 리스트 참조 변수
+    category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))
+```
+
+* ```Category``` 모델이 ```Post```를 역참조할 때 ```lazy='dynamic'```이 의미가 있다.
+* ```Post``` 모델은 1:N으로 가져오기 때문에 무조건 하나의 쿼리(single query)로 조인(join)한다.
+    * ```category = db.relationship('Category', backref='posts', lazy='dynamic')``` 문장은 에러가 발생한다.
+    * 참조하는 쪽에서는 참조되는 모델의 데이터를 사용해야할 가능성이 높고 하나의 레코드만 가져오므로 오버헤드가 크지 않기 때문에 강제로 조인한다.
+    * 만약 참조 변수를 ```Category``` 모델에 두고 ```posts = db.relationship('Post', lazy='immediate') 코드로 해야 레코드를 가져온다.
