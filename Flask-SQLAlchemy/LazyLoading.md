@@ -54,9 +54,9 @@ SELECT category.id, category.name
 FROM category
 ```
 
-## category = db.relationship('Category', lazy='immediate')
+## category = db.relationship('Category', lazy='select')
 
-- immediate, select, subquery 2.1.과 동일
+- select, immediate, subquery 디폴트와 동일
 
 ## category = db.relationship('Category', lazy='joined')
 
@@ -110,9 +110,9 @@ FROM post
 WHERE ? = post.category_id
 ```
 
-## posts = db.relationship('Post', lazy='dynamic')
+## posts = db.relationship('Post', lazy='select')
 
-- dynamic, immediate, select 3.1.과 동일
+- select, immediate 디폴트와 동일
 
 ```python
 c = Category.query.first()
@@ -125,6 +125,28 @@ FROM category
 
 ```python
 c.posts
+```
+
+```sql
+SELECT post.id, post.title, post.body, post.pub_date, post.category_id
+FROM post 
+```
+
+## posts = db.relationship('Post', lazy='select')
+
+디폴트, select, immediate와 동일하나 c.posts에서 all() 메소드를 체인해야 한다.
+
+```python
+c = Category.query.first()
+```
+
+```sql
+SELECT category.id, category.name
+FROM category
+```
+
+```python
+c.posts.all()
 ```
 
 ```sql
