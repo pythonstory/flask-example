@@ -7,6 +7,12 @@
 * Flask-SQLAlchemy
 * Flask-WTP
 
+## Features
+
+* Custom config file support
+* Structure with blueprint
+    * templates and static folders
+
 ## Configuration and Run
 
 It is not recommended to use ```config.py``` for your production server.
@@ -29,6 +35,7 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 
 * Error pages (404, 500)
 * Themes with AlloyUI
+* Models/Forms file
 * Time(moment)
 * i18n/l10n
 * Logger
