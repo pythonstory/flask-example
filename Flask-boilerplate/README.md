@@ -16,3 +16,29 @@ You have to have your own config file such as ```config_production.py```, and yo
 ```
 python manage.py -c config_production runserver
 ```
+
+If you not specify ```-c``` option, it will import the default ```config.py```.
+
+## Commands
+
+### runserver
+
+### shell
+
+## TODO
+
+* Error pages (404, 500)
+* Themes with AlloyUI
+* Time(moment)
+* i18n/l10n
+* Logger
+* Mail
+* Flask-migrate
+* db.create_all(), db.drop_all() command
+* Tests
+
+## References
+
+* Flask Web Development - Chapter 7, Miguel Grinberg, O'Reilly
+* [How to Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
+* [Modular Applications with Blueprints](http://flask.pocoo.org/docs/0.11/blueprints/#blueprints)
