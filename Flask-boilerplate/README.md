@@ -12,6 +12,7 @@
 * Custom config file support
 * Structure with blueprint
     * templates and static folders
+    * theme supported
 
 ## Configuration and Run
 
@@ -33,7 +34,6 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 
 ## TODO
 
-* Error pages (404, 500)
 * Themes with AlloyUI
 * Models/Forms file
 * Time(moment)
