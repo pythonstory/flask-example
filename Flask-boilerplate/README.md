@@ -41,7 +41,6 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 
 ## TODO
 
-* Models/Forms file
 * Mail
 * Flask-migrate
 * db.create_all(), db.drop_all() command
