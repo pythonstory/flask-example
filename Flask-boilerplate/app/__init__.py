@@ -30,7 +30,7 @@ def create_app(config=None, app_name=None):
     # 블루프린트 모듈 등록
     from app.main import main as main_blueprint
 
-    app.register_blueprint(main_blueprint)
+    app.register_blueprint(main_blueprint, url_prefix='/')
 
     return app
 
