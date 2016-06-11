@@ -16,6 +16,7 @@
 * Structure with blueprint
     * templates and static folders
     * theme supported
+* AlloyUI support
 * i18n / l10n support
 * Unit Test
 * Logging support
@@ -40,7 +41,6 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 
 ## TODO
 
-* Themes with AlloyUI
 * Models/Forms file
 * Mail
 * Flask-migrate
