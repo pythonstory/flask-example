@@ -14,6 +14,7 @@
 * Structure with blueprint
     * templates and static folders
     * theme supported
+* i18n / l10n support
 
 ## Configuration and Run
 
@@ -38,7 +39,6 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 * Themes with AlloyUI
 * Models/Forms file
 * Time(moment)
-* i18n/l10n
 * Logger
 * Mail
 * Flask-migrate
