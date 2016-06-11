@@ -11,10 +11,14 @@
 ## Features
 
 * Custom config file support
+    * ```config_production.py``` for production
+    * ````config_testing.py``` for testing
 * Structure with blueprint
     * templates and static folders
     * theme supported
 * i18n / l10n support
+* Unit Test
+* Logging support
 
 ## Configuration and Run
 
@@ -38,12 +42,9 @@ If you not specify ```-c``` option, it will import the default ```config.py```.
 
 * Themes with AlloyUI
 * Models/Forms file
-* Time(moment)
-* Logger
 * Mail
 * Flask-migrate
 * db.create_all(), db.drop_all() command
-* Tests
 
 ## References
 

@@ -1,3 +1,4 @@
+import logging
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -14,3 +15,7 @@ SQLALCHEMY_ECHO = True
 BABEL_LANGUAGES = {'en': 'English', 'ko': 'Korean'}
 BABEL_DEFAULT_LOCALE = 'en'
 BABEL_DEFAULT_TIMEZONE = 'UTC'
+
+LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+LOGGING_LOCATION = 'app.log'
+LOGGING_LEVEL = logging.DEBUG

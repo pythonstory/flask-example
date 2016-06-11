@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from flask import Flask, g, request, current_app
 from flask_babel import Babel
 from flask_sqlalchemy import SQLAlchemy
@@ -17,6 +19,13 @@ def create_app(config=None, app_name=None):
     # Flask 확장 초기화
     db.init_app(app)
     babel.init_app(app)
+
+    # Logging 설정
+    handler = logging.FileHandler(app.config['LOGGING_LOCATION'])
+    handler.setLevel(app.config['LOGGING_LEVEL'])
+    formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
+    handler.setFormatter(formatter)
+    app.logger.addHandler(handler)
 
     # 블루프린트 모듈 등록
     from app.main import main as main_blueprint
