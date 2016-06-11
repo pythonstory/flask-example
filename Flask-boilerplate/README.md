@@ -6,6 +6,7 @@
 * Flask-script
 * Flask-SQLAlchemy
 * Flask-WTP
+* Flask-Babel
 
 ## Features
 

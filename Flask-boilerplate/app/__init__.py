@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask
+from flask import Flask, g, request, current_app
+from flask_babel import Babel
 from flask_sqlalchemy import SQLAlchemy
 
+# Flask 확장 선언
 db = SQLAlchemy()
+babel = Babel()
 
 
 def create_app(config=None, app_name=None):
@@ -14,6 +17,7 @@ def create_app(config=None, app_name=None):
 
     # Flask 확장 초기화
     db.init_app(app)
+    babel.init_app(app)
 
     # 블루프린트 모듈 등록
     from app.main import main as main_blueprint
@@ -21,3 +25,23 @@ def create_app(config=None, app_name=None):
     app.register_blueprint(main_blueprint)
 
     return app
+
+
+@babel.localeselector
+def get_locale():
+    # 로그인한 사용자는 사용자 로케일 설정을 따른다.
+    user = getattr(g, 'user', None)
+
+    if user is not None:
+        return user.locale
+
+    # 사용자 브라우저에서 가장 적합한 언어를 선택한다.
+    return request.accept_languages.best_match(current_app.config['BABEL_LANGUAGES'].keys())
+
+
+@babel.timezoneselector
+def get_timezone():
+    user = getattr(g, 'user', None)
+
+    if user is not None:
+        return user.timezone
