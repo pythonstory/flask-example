@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from flask import Flask, g, request, current_app
 from flask_babel import Babel
 from flask_sqlalchemy import SQLAlchemy
