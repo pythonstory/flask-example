@@ -3,10 +3,10 @@
 ## Core
 
 * 웹 애플리케이션 기본 구조
-    * 단 하나의 파일
-    * 애플리케이션과 실행 스크립트 분리
-    * 애플리케이션을 패키지로 구성
-    * 애플리케이션에 뷰 파일 분리 및 설정 클래스 정의
+    * 단 하나의 파일 [Flask-core/01-hello](Flask-core/01-hello)
+    * 애플리케이션과 실행 스크립트 분리 [Flask-core/02-hello](Flask-core/02-hello)
+    * 애플리케이션을 패키지로 구성 [Flask-core/03-hello](Flask-core/03-hello)
+    * 애플리케이션에 뷰 파일 분리 및 설정 클래스 정의 [Flask-core/04-hello](Flask-core/04-hello)
 * 요청
     * 라우팅
     * 요청 메소드
