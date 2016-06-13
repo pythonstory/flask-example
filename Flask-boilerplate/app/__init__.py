@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+import logging.handlers
 
 from flask import Flask, g, request, current_app
 from flask_babel import Babel
@@ -21,9 +22,9 @@ def create_app(config=None, app_name=None):
     babel.init_app(app)
 
     # Logging 설정
-    handler = logging.FileHandler(app.config['LOGGING_LOCATION'])
-    handler.setLevel(app.config['LOGGING_LEVEL'])
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
+    handler = logging.handlers.RotatingFileHandler(app.config['LOGGING_LOCATION'])
+    handler.setLevel(app.config['LOGGING_LEVEL'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
