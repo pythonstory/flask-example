@@ -16,7 +16,7 @@
 
 ### 01-create-app
 
-소스: [Flask-Login/01-create-app](01-create-app)
+소스: [Flask-Script/01-create-app](01-create-app)
 
 * ```create_app``` 팩토리 함수로 ```app``` 인스턴스를 생성한다.
 * ```app``` 인스턴스를 ```Manager``` 인스턴스 생성할 때 파라미터로 넘겨준다.
@@ -26,7 +26,15 @@
 
 ### 02-create-app-blueprint
 
-소스: [Flask-Login/02-create-app-blueprint](01-create-app-blueprint)
+소스: [Flask-Script/02-create-app-blueprint](01-create-app-blueprint)
 
 * ```01-create-app``` 예제에서는 ```create_app``` 팩토리 함수 안에서 뷰 라우팅 함수를 정의했으나 ```create_app``` 함수가 너무 길어져서 관리하기가 어려우므로 라우팅 처리 함수를 blueprint로 별도 모듈 파일로 분리한다.
 * ```create_app``` 함수 안에서 ```@app.errorhandler``` 데코레이터로 404 에러 처리 함수를 정의했다. 이 정도 함수는 시스템 전역적으로 관리하는 것이 효율적이라 판단된다.
+
+### 03-create-app-callback
+
+소스: [Flask-Script/02-create-app-callback](03-create-app-callback)
+
+* ```01-create-app``` 예제와 ```02-create-app-blueprint``` 예제는 모두 ```create_app``` 인스턴스를 이용하지만 이번 예제는 ```create_app``` 함수를 콜백으로 넘겨준다.
+* Flask-Script 확장에서 ```-c```와 같은 옵션을 사용하려면 ```create_app``` 함수를 무조건 콜백으로 넘겨줘야 한다.
+* 콜백 외부에서는 ```app``` 변수를 사용할 수 없으므로 ```@app```으로 시작하는 데코레이터를 쓰려면 모두 콜백 함수 안에 선언해야 한다.
