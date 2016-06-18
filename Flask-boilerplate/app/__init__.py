@@ -6,6 +6,7 @@ from flask import Flask, g, request, current_app
 from flask_babel import Babel
 from flask_sqlalchemy import SQLAlchemy
 
+
 # Flask 확장 선언
 db = SQLAlchemy()
 babel = Babel()
@@ -30,7 +31,6 @@ def create_app(config=None, app_name=None):
 
     # 블루프린트 모듈 등록
     from app.blueprints.main import main as main_blueprint
-
     app.register_blueprint(main_blueprint, url_prefix='/')
 
     return app
